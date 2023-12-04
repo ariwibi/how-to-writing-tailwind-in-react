@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { cn } from "../utils/cns";
-
-export default function Button({ children, color, size }) {
+function buttonStyle({ color, size }) {
+  const base = "shadow-xl  hover:shadow-none font-semibold rounded";
   const variants = {
     color: {
       primary: "bg-blue-500 hover:bg-blue-600 text-white shadow-blue-300",
@@ -12,18 +12,11 @@ export default function Button({ children, color, size }) {
       medium: "py-2 px-4",
     },
   };
-  return (
-    <button
-      className={cn(
-        "shadow-xl  hover:shadow-none",
-        "font-semibold",
-        "rounded",
-        variants.color[color],
-        variants.size[size]
-      )}>
-      {children}
-    </button>
-  );
+
+  return cn(base, variants.color[color], variants.size[size]);
+}
+export default function Button({ children, color, size }) {
+  return <button className={buttonStyle({ color, size })}>{children}</button>;
 }
 
 Button.defaultProps = {
